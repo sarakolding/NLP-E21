@@ -17,7 +17,7 @@ nlp = spacy.load("en_core_web_sm")
 
 
 ## CORPUS LOADER
-def corpus_loader(folder: str) -> list[str]: #changed from List
+def corpus_loader(folder: str): #changed from List
     """
     A corpus loader function which takes in a path to a 
     folder and returns a list of strings.
@@ -28,7 +28,7 @@ def corpus_loader(folder: str) -> list[str]: #changed from List
         file_path = folder + "/" + str(file)
         with open(file_path, encoding="utf8") as f:
             lines = f.read()
-        corpus.append([lines])
+        corpus.append(lines)
+    return corpus
 
 corpus1 = corpus_loader("C:/Users/sarak/OneDrive - Aarhus universitet/COGNITIVE SCIENCE/SEVENTH SEMESTER/NATURAL LANGUAGE PROCESSING/NLP-E21/syllabus/classes/data/train_corpus")
-print(corpus1[1])
