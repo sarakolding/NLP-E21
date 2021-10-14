@@ -29,21 +29,21 @@ def term_freq(tokens) -> dict:
 
 def doc_freqs(docs) -> dict:
     """
-    Takes in a list of spacy doc objects and returns a dictionary of frequencies for each token
-    over all the documents. E.g. {"Aarhus": 20, "the": 2301, ...}
+    Takes in a list of spacy Doc objects and return a dictionary of 
+    frequencies for each token over all the documents. E.g. {"Aarhus": 20, "the": 2301, ...}
     """
-    dict = {}
+    res_dict = {}
     for doc in docs:
+        # create empty list to check whether token appears multiple times in doc
+        duplicates = []
         for token in doc:
-            # for the first iteration when there are no instances in the dictionary: add all unique
-            # tokens in the doc as keys with a value of 1
-            if len(dict) == 0:
-                dict = {token.text: 1}
-            # for the following iterations: if the token is already in the dictionary, add 1 to the count value
-            elif token.text in dict:
-                dict[token.text] += 1
-            # for the following iterations: if the token is not already in the dictionary, add an entrance
-            # in the dictionary with the token as key and a value of 1
-            elif token.text not in dict:
-                dict[token.text] = 1
-    return dict
+            if token.text not in duplicates: 
+                # if token is not in dict; add token as key and 1 as value
+                if token.text not in res_dict:
+                    res_dict[token.text] = 1
+                # if the token is already in dic; add 1 to the value of that token
+                else: 
+                    res_dict[token.text] += 1
+                duplicates.append(token.text)
+    return res_dict
+
