@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import numpy as np
 import torch
 
@@ -9,12 +8,6 @@ from util import batch
 from LSTM import RNN
 from embedding import gensim_to_torch_embedding
 
-=======
-import typing
-from datasets import load_dataset
-import gensim.downloader as api
-
->>>>>>> 2fab353bd96fd084780ff25dfb2e4b808cfe59d1
 # DATASET
 # loading the conllpp dataset from the dataset package
 dataset = load_dataset("conllpp")
@@ -28,12 +21,6 @@ print(train["ner_tags"][:1])
 num_classes = train.features["ner_tags"].feature.num_classes 
 
 # CONVERTING EMBEDDINGS
-<<<<<<< HEAD
-=======
-import numpy as np
-import torch
-
->>>>>>> 2fab353bd96fd084780ff25dfb2e4b808cfe59d1
 model = api.load("glove-wiki-gigaword-50")
 
 # convert gensim word embedding to torch word embedding
@@ -42,7 +29,6 @@ embedding_layer, vocab = gensim_to_torch_embedding(model)
 
 # PREPARING A BATCH
 
-<<<<<<< HEAD
 # shuffle dataset
 shuffled_train = dataset["train"].shuffle(seed=1)
 
@@ -52,8 +38,6 @@ batches_tokens = batch(shuffled_train["tokens"], batch_size)
 batches_tags = batch(shuffled_train["ner_tags"], batch_size)
 
 
-=======
->>>>>>> 2fab353bd96fd084780ff25dfb2e4b808cfe59d1
 def tokens_to_idx(tokens, vocab=model.key_to_index):
     """
     Ideas to understand this function:
@@ -66,15 +50,9 @@ def tokens_to_idx(tokens, vocab=model.key_to_index):
     return [vocab.get(t.lower(), vocab["UNK"]) for t in tokens]
 
 
-<<<<<<< HEAD
 # sample using only the first batch
 batch_tokens = next(batches_tokens)
 batch_tags = next(batches_tags)
-=======
-# subsetting sample batch of 10 sentences
-batch_tokens = train["tokens"][:10]
-batch_tags = train["ner_tags"][:10]
->>>>>>> 2fab353bd96fd084780ff25dfb2e4b808cfe59d1
 batch_tok_idx = [tokens_to_idx(sent) for sent in batch_tokens]
 batch_size = len(batch_tokens)
 
